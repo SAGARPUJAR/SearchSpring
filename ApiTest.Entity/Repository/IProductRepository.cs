@@ -7,7 +7,7 @@ namespace ApiTest.Entity.Repository
     /// </summary>
     public interface IProductRepository
     {
-        public Task<IEnumerable<Product>> GetProducts();
+        public Task<IEnumerable<Product>> GetProducts(PaginationFilter filter);
         public Task<Product> GetProduct(int productId);
         public Task<Product> AddProduct(Product product);
         public Task<Product> UpdateProduct(Product product);

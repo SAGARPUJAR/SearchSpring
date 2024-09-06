@@ -26,9 +26,12 @@ namespace ApiTest.Entity
         /// GetProductsAsync : Get the All Product List.
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<IEnumerable<Product>> GetProducts(PaginationFilter filter)
         {
-            return await appDbContext.Products.ToListAsync();
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            return await appDbContext.Products.Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+               .Take(validFilter.PageSize)
+               .ToListAsync(); ;
         }
         /// <summary>
         /// AddProduct : Insert New Product Details.

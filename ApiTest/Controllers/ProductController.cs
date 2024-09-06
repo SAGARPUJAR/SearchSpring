@@ -1,5 +1,6 @@
 ﻿using ApiTest.Contracts;
 using ApiTest.Contracts.Model;
+using ApiTest.Entity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -21,11 +22,11 @@ namespace ApiTest.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetProducts()
+        public async Task<ActionResult> GetProducts([FromQuery] PaginationFilterPoco filter)
         {
             try
             {
-                return Ok(await _productRepository.GetProducts());
+                return Ok(await _productRepository.GetProducts(filter));
             }
             catch (Exception)
             {

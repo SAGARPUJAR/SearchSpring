@@ -1,4 +1,5 @@
 ﻿using ApiTest.Contracts.Model;
+using ApiTest.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ApiTest.Contracts
 {
     public interface IProductContracts
     {
-        public Task<IEnumerable<ProductPoco>> GetProducts();
+        public Task<IEnumerable<ProductPoco>> GetProducts(PaginationFilterPoco filter);
         public Task<ProductPoco> GetProduct(int productId);
         public Task<ProductPoco> AddProduct(ProductPoco product);
         public Task<ProductPoco> UpdateProduct(ProductPoco product);

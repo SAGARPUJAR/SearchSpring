@@ -1,4 +1,5 @@
 ﻿using ApiTest.Contracts.Model;
+using ApiTest.Entity;
 using ApiTest.Entity.Entites;
 using ApiTest.Entity.Repository;
 using AutoMapper;
@@ -18,9 +19,10 @@ namespace ApiTest.Contracts
         /// GetProducts : Get List of Products
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<ProductPoco>> GetProducts()
+        public async Task<IEnumerable<ProductPoco>> GetProducts(PaginationFilterPoco filter)
         {
-            List<Product> productFromDB = (List<Product>)await productRepository.GetProducts();
+            PaginationFilter paginationFilter = _ProductMapper.Map<PaginationFilterPoco, PaginationFilter>(filter);
+            List<Product> productFromDB = (List<Product>)await productRepository.GetProducts(paginationFilter);
             List<ProductPoco> personsModel = _ProductMapper.Map<List<Product>, List<ProductPoco>>(productFromDB);
             return personsModel;
         }
